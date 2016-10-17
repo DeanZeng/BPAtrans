@@ -16,8 +16,7 @@ public class SelfFunc {
 		//convert from string to double
 		//for BPAtoCard conversion 
 		//Fm.n
-		for(int i=0;i<m-str.length();i++)
-		{
+		while(m>str.length()){
 			str=str+' ';
 		}
 		char[] c=(str+' ').toCharArray();
@@ -77,6 +76,52 @@ public class SelfFunc {
 		int m=str.length();
 		return strToD(str,m,0);
 	}
+	protected static int strToI(String str){
+		int f=0;
+		int l=str.length();
+		int begin=0;
+		int end=0;
+		boolean negative=false;
+		for(int i=0;i<l;i++)
+		{
+			if(str.charAt(i)!=' '){
+				begin=i;break;
+			}
+		}
+		for(int i=l-1;i>=0;i--){
+			if(str.charAt(i)!=' ')
+			{
+				end=i;
+				break;
+			}
+		}
+		if(begin==end){
+			return 0;
+		}
+		if(str.charAt(begin)=='-'){
+			negative=true;
+			begin++;
+		}
+		for(int i=begin;i<=end;i++)
+		{
+			if((str.charAt(i)>='0')&&(str.charAt(i)<='9')){
+				f=f+str.charAt(i)*10;
+			}
+			else if(str.charAt(i)=='.'){
+				break;
+			}
+			else
+			{
+				System.out.println("String:'"+str+"' 格式不对，输出结果为0");
+				return 0;
+			}
+		}
+		if(negative)
+		{
+			f=-f;
+		}
+		return f;
+	}
 	protected static String substring(String str, int beginIn, int endIn){
 		
 		for(int i=0;i<str.length();i++)
@@ -106,24 +151,17 @@ public class SelfFunc {
 		}
 		return l;
 	}
-	
-	public static boolean isBcard(String str){
-		//判断是否为B卡
-		if(str.isEmpty())
-			return false;
-		if (str.charAt(0) == 'B') {
-			if ((str.charAt(1) == ' ') || (str.charAt(1) == 'T') || (str.charAt(1) == 'C') || (str.charAt(1) == 'V') || (str.charAt(1) == 'E') || (str.charAt(1) == 'Q')
-					|| (str.charAt(1) == 'G') || (str.charAt(1) == 'F') || (str.charAt(1) == 'S') || (str.charAt(1) == 'J') || (str.charAt(1) == 'K')
-					|| (str.charAt(1) == 'L') || (str.charAt(1) == 'X')) {
-				return true;
-			} else {
-				return false;
+	protected static char charAt(String str, int index){
+		for(int i=0;i<index;i++)
+		{
+			if(str.charAt(i)>255)
+			{
+				index--;
 			}
-		} else {
-			return false;
 		}
+		char c=str.charAt(index);
+		return c;
 	}
-	
 }
 
 class TestFunc{

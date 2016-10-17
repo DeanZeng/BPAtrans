@@ -7,29 +7,30 @@ import java.util.*;
 public class testmain {
 
 	public static void main(String[] args) throws IOException {
-		List<Integer> bb=new ArrayList<Integer>();
-		for(int i=0;i<10;i++)
-		{
-			bb.add(i);
-		}
 		FileReader q=new FileReader("wzl2016.dat");
 		BufferedReader b = new BufferedReader(q);
 		String str;
 		List<Bcard> bcardArray=new ArrayList<Bcard>();
 		int bi=0;
+		List<Lcard> lcardArray=new ArrayList<Lcard>();
+		int li=0;
 		
 		while((str=b.readLine())!=null){
-			if(SelfFunc.isBcard(str)){
-//				if(str.indexOf('яс')!=-1)
-//				{
-//					System.out.println("kanyikan");
-//				}
+			if(Bcard.isBcard(str)){
 				Bcard bc=new Bcard();
 				bc.CharToCard(str);
 				bcardArray.add(bc);
 				bi++;
-			}		
+			}
+			if(Lcard.isLcard(str))
+			{
+				Lcard lc=new Lcard();
+				lc.CharToCard(str);
+				lcardArray.add(lc);
+				li++;
+			}	
 		}
+		
 		b.close();
 		System.out.println("OK!");
 		try {
@@ -44,6 +45,22 @@ public class testmain {
 						bcardArray.get(i).PMW+"','"+bcardArray.get(i).QMVAR+"','"+bcardArray.get(i).ShMW+"','"+bcardArray.get(i).ShMVAR+"','"+
 						bcardArray.get(i).Pmax+"','"+bcardArray.get(i).PgenMW+"','"+bcardArray.get(i).QmaxMAVR+"','"+bcardArray.get(i).QminMVAR+"','"+
 						bcardArray.get(i).VholdVmaxPU+"','"+bcardArray.get(i).VholdVminPU+"')";
+				System.out.println(sql);
+				try{
+				Statement stmt=conn.createStatement();
+				stmt.executeUpdate(sql);
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			for(int i=0;i<li;i++){
+				String sql="insert into bpadb.lcardtb values('"+lcardArray.get(i).type+"','"+lcardArray.get(i).chgcde+"','"+
+						lcardArray.get(i).owner+"','"+lcardArray.get(i).name1+"','"+lcardArray.get(i).kV1+"','"+lcardArray.get(i).meter+"','"+
+						lcardArray.get(i).name2+"','"+lcardArray.get(i).kV2+"','"+lcardArray.get(i).CktID+"','"+lcardArray.get(i).IRatA+"','"+
+						lcardArray.get(i).R+"','"+lcardArray.get(i).X+"','"+lcardArray.get(i).G+"','"+lcardArray.get(i).B+"','"+
+						lcardArray.get(i).miles+"','"+lcardArray.get(i).DescData+"','"+"20001101"+"','"+"2001130"+"')";
 				System.out.println(sql);
 				try{
 				Statement stmt=conn.createStatement();
