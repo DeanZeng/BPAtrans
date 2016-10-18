@@ -234,4 +234,26 @@ public class Tcard {
 		}
 
 	}
+	public static boolean isLcard(String s)
+	{
+		if(s.length()<3)
+		{
+			return false;
+		}
+		if (s.charAt(0) == 'T')
+		{
+			if (s.charAt(1) == ' ' )
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
