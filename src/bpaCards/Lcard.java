@@ -116,7 +116,7 @@ public class Lcard {
 		{
 			return;
 		}
-		//char CktID;			//32 A1 回路号
+		//char CktID;			//32 I1 回路号
 		if (len > format1[9])
 		{
 			if(SelfFunc.charAt(s,format1[9])==' ')

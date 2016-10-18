@@ -24,11 +24,10 @@ public class SelfFunc {
 		double f=0;
 		if (str.indexOf('.') ==-1)
 		{
-			//��������
+			//无小数点
 			for(int i=m-1;i>=0;i--)
 			{
-				//����������
-
+				//插入小数点
 				if((c[i]>='0')&&(c[i]<='9')){
 					if(m-i-1>=n)
 					{
@@ -46,21 +45,20 @@ public class SelfFunc {
 				}
 			}
 		}
-			//��������
-			for(int i=0;i<str.length();i++)//��������.������0;
-			{
-				if(((c[i]<'0')||(c[i]>'9'))&&(c[i]!='.')&&(c[i]!='-')){
-					c[i]='0';
-				}
+		// 有小数点
+		for (int i = 0; i < str.length(); i++)
+		{
+			//其他字符（包括空格）用0替代
+			if (((c[i] < '0') || (c[i] > '9')) && (c[i] != '.') && (c[i] != '-')) {
+				c[i] = '0';
 			}
-			String s=new String(c);
-			try{
-			f=Double.parseDouble(s);
-			}
-			catch(Exception e){
-				e.printStackTrace();
-				
-			}
+		}
+		String s = new String(c);
+		try {
+			f = Double.parseDouble(s);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	
 		if ((Math.abs(f) < 0.0000001) || (Math.abs(f)>1000000))
 		{
@@ -77,6 +75,10 @@ public class SelfFunc {
 		return strToD(str,m,0);
 	}
 	protected static int strToI(String str){
+		//convert string to integer
+		//for BPA card conversion
+		//required formation: "  (-)XXXX。    "
+		//X:0-9
 		int f=0;
 		int l=str.length();
 		int begin=0;
@@ -152,6 +154,8 @@ public class SelfFunc {
 		return l;
 	}
 	protected static char charAt(String str, int index){
+		//返回第n个字符
+		//针对含有汉字的字符串，汉字占两个字符长度
 		for(int i=0;i<index;i++)
 		{
 			if(str.charAt(i)>255)
@@ -170,10 +174,8 @@ class TestFunc{
 		String s;
 		int m,n;
 		boolean endflag=true;
-		// ���� System.in ���� BufferedReader 
 		Scanner scan=new Scanner(System.in);
 		System.out.println("Enter characters, 'q' to quit.");
-		// ��������
 		do {
 			s =  scan.next();
 			m=scan.nextInt();
