@@ -16,6 +16,7 @@ public class SelfFunc {
 		//convert from string to double
 		//for BPAtoCard conversion 
 		//Fm.n
+		//problem:1)" -18" 2)"    " (3)" . "(4)"  1137"F6,5
 		while(m>str.length()){
 			str=str+' ';
 		}
@@ -46,23 +47,101 @@ public class SelfFunc {
 			}
 		}
 		// 有小数点
-		for (int i = 0; i < str.length(); i++)
-		{
-			//其他字符（包括空格）用0替代
-			if (((c[i] < '0') || (c[i] > '9')) && (c[i] != '.') && (c[i] != '-')) {
-				c[i] = '0';
+		int begin=0,end=0,l=c.length;
+		for(begin=0;begin<l;begin++){
+			if(c[begin]!=' '){
+				break;
 			}
 		}
-		String s = new String(c);
+		for(end=l-1;end>=0;end--){
+			if(c[end]!=' '){
+				break;
+			}
+		}
+		if(begin==l){
+			return 0;
+		}
+		if((begin==end)&&((c[begin]<'0')&&(c[begin]<'9'))){
+			return 0;
+		}
+		boolean negative=false;
+		if(str.charAt(begin)=='-'){
+			negative=true;
+			begin++;
+		}
+		for (int i = begin; i <=end; i++)
+		{
+			//其他字符（包括空格）用0替代
+			if((c[i]>='0')&&(c[i]<='9')){
+			}
+			else if(c[i]=='.'){
+			}
+			else if(c[i]==' ')
+			{
+				c[i]='0';
+			}
+			else
+			{
+				System.out.println("String:'"+str+"' 格式不对，输出结果为0");
+				return 0;
+			}
+		}
+		String s = new String(c,begin,end-begin+1);
 		try {
 			f = Double.parseDouble(s);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("String:'"+str+"' 格式不对，输出结果为0");
+			return 0;
 		}
-	
+		f=negative?-f:f;
 		if ((Math.abs(f) < 0.0000001) || (Math.abs(f)>1000000))
 		{
 			f = 0;
+		}
+		return f;
+	}
+	protected static double strToDtest(String str, int m, int n){
+		//convert from string to double
+		//for BPAtoCard conversion 
+		//Fm.n
+		//problem:1)" -18" 2)"   " 3) "456" F(3,2)
+		int f = 0;
+		int l = str.length();
+		int begin = 0;
+		int end = 0;
+		boolean negative = false;
+		for (int i = 0; i < l; i++) {
+			if (str.charAt(i) != ' ') {
+				begin = i;
+				break;
+			}
+		}
+		for (int i = l - 1; i >= 0; i--) {
+			if (str.charAt(i) != ' ') {
+				end = i;
+				break;
+			}
+		}
+		if (begin == end) {
+			return 0;
+		}
+		if (str.charAt(begin) == '-') {
+			negative = true;
+			begin++;
+		}
+		for (int i = begin; i <= end; i++) {
+			if ((str.charAt(i) >= '0') && (str.charAt(i) <= '9')) {
+				f = f + str.charAt(i) * 10;
+			} else if (str.charAt(i) == '.') {
+				break;
+			} else {
+				System.out.println("String:'" + str + "' 格式不对，输出结果为0");
+				return 0;
+			}
+		}
+		if (negative) {
+			f = -f;
 		}
 		return f;
 	}

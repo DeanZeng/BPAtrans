@@ -130,6 +130,9 @@ public class Bcard {
 		// char QminMVAR[5]; //53-57 F5.0
 		if (len > format1[14]) {
 			temp = SelfFunc.substring(s, format1[14], format1[14] + SelfFunc.min(format2[14], len - format1[14]));
+			if(temp.charAt(1)=='-'){
+				System.out.println("there is a warning");
+			}
 			QminMVAR = SelfFunc.strToD(temp);
 		} else {
 			return;

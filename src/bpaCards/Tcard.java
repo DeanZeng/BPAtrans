@@ -234,7 +234,7 @@ public class Tcard {
 		}
 
 	}
-	public static boolean isLcard(String s)
+	public static boolean isTcard(String s)
 	{
 		if(s.length()<3)
 		{
