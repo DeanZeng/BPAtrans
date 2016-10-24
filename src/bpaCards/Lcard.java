@@ -28,6 +28,15 @@ public class Lcard {
 	public char  MonthOut=' ';					//78 A1
 	public int  YearOut=0;					//79-80 I2
 	
+	
+	public String sqlInsert(String dbname,String tablename){
+		//attention: escape for single quote marker as ''
+		String sql="insert into "+dbname+"."+tablename+" values('"+type+"','"+chgcde+"','"+
+				owner.replaceAll("'", "''")+"','"+name1.replaceAll("'", "''")+"','"+kV1+"','"+meter+"','"+
+				name2.replaceAll("'", "''")+"','"+kV2+"','"+CktID+"','"+IRatA+"','"+
+				R+"','"+X+"','"+G+"','"+B+"','"+miles+"','"+DescData+"',"+SelfFunc.bpadate(MonthIn,YearIn)+","+SelfFunc.bpadate(MonthOut, YearOut)+")";
+		return sql;
+	}
 	public void CharToCard(String s)
 	{
 		int len = SelfFunc.strlen(s);

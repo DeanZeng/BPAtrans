@@ -101,8 +101,8 @@ public class ACcard {
 		zoneNo = k;
 		//return;
 	}
-	public String sqlInsert(){
-		String sql="insert into bpadb.accardtb values('"+type+"','"+areaName+"','"+slkName+"','"+slkbasekV+"','"+expMW;
+	public String sqlInsert(String dbname,String tablename){
+		String sql="insert into "+dbname+"."+tablename+" values('"+type+"','"+chgcde+"','"+areaName+"','"+slkName+"','"+slkbasekV+"','"+expMW;
 		for(int i=0;i<20;i++){
 			sql=sql+"','"+zone[i];
 		}

@@ -26,6 +26,14 @@ public class Bcard {
 	public String Rname = "        "; // 66-73 A8
 	public double RkV = 0; // 74-77 F4.0
 	public double Rvars = 0; // 78-80 F3.0
+	
+	public String sqlInsert(String dbname,String tablename){
+		//attention: escape for single quote marker as ''
+		String sql="insert into "+dbname+"."+tablename+" values('"+ type+"','"+subtype+"','"+chgcde+"','"+
+				owner.replaceAll("'", "''")+"','"+name.replaceAll("'", "''")+"','"+kV+"','"+zone+"','"+PMW+"','"+QMVAR+"','"+ShMW+"','"+ShMVAR+"','"+
+				Pmax+"','"+PgenMW+"','"+QmaxMAVR+"','"+QminMVAR+"','"+VholdVmaxPU+"','"+VholdVminPU+"')";
+		return sql;
+	}
 
 	public void CharToCard(String s) {
 		int len = SelfFunc.strlen(s);

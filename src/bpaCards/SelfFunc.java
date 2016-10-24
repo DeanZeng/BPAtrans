@@ -11,6 +11,9 @@ public class SelfFunc {
 	protected static int min(int a,int b){
 		return a<b?a:b;
 	}
+	protected static String bpadate(char month, int year){
+		return "null";
+	}
 	protected static double  strToD(String str, int m, int n)
 	{
 		//convert from string to double

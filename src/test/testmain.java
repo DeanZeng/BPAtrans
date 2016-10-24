@@ -7,7 +7,7 @@ import java.util.*;
 public class testmain {
 
 	public static void main(String[] args) throws IOException {
-		FileReader q=new FileReader("2016Äê¶¬´ó.dat");
+		FileReader q=new FileReader("sx2015.dat");
 		BufferedReader b = new BufferedReader(q);
 		String str;
 		List<ACcard> accardArray=new ArrayList<ACcard>();
@@ -52,13 +52,13 @@ public class testmain {
 		System.out.println("OK!");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost:3306/bpadb";
+			String url="jdbc:mysql://localhost:3306/bpadb?autoReconnect=true&useSSL=false";
 			String user="bpadmin";
 			String password="123456";
 			Connection conn=DriverManager.getConnection(url,user,password);
 			for(int i=0;i<aci;i++){
-				String sql=accardArray.get(i).sqlInsert();
-				System.out.println(sql);
+				String sql=accardArray.get(i).sqlInsert("bpadb","accardtb");
+//				System.out.println(sql);
 				try{
 				Statement stmt=conn.createStatement();
 				stmt.executeUpdate(sql);
@@ -68,54 +68,42 @@ public class testmain {
 					e.printStackTrace();
 				}
 			}
-//			for(int i=0;i<bi;i++){
-//				String sql="insert into bpadb.bcardt values('"+bcardArray.get(i).type+"','"+bcardArray.get(i).subtype+"','"+bcardArray.get(i).chgcde+"','"+
-//						bcardArray.get(i).owner+"','"+bcardArray.get(i).name+"','"+bcardArray.get(i).kV+"','"+bcardArray.get(i).zone+"','"+
-//						bcardArray.get(i).PMW+"','"+bcardArray.get(i).QMVAR+"','"+bcardArray.get(i).ShMW+"','"+bcardArray.get(i).ShMVAR+"','"+
-//						bcardArray.get(i).Pmax+"','"+bcardArray.get(i).PgenMW+"','"+bcardArray.get(i).QmaxMAVR+"','"+bcardArray.get(i).QminMVAR+"','"+
-//						bcardArray.get(i).VholdVmaxPU+"','"+bcardArray.get(i).VholdVminPU+"')";
+			for(int i=0;i<bi;i++){
+				String sql=bcardArray.get(i).sqlInsert("bpadb", "bcardtb");
 //				System.out.println(sql);
-//				try{
-//				Statement stmt=conn.createStatement();
-//				stmt.executeUpdate(sql);
-//				}
-//				catch (SQLException e)
-//				{
-//					e.printStackTrace();
-//				}
-//			}
-//			for(int i=0;i<li;i++){
-//				String sql="insert into bpadb.lcardtb values('"+lcardArray.get(i).type+"','"+lcardArray.get(i).chgcde+"','"+
-//						lcardArray.get(i).owner+"','"+lcardArray.get(i).name1+"','"+lcardArray.get(i).kV1+"','"+lcardArray.get(i).meter+"','"+
-//						lcardArray.get(i).name2+"','"+lcardArray.get(i).kV2+"','"+lcardArray.get(i).CktID+"','"+lcardArray.get(i).IRatA+"','"+
-//						lcardArray.get(i).R+"','"+lcardArray.get(i).X+"','"+lcardArray.get(i).G+"','"+lcardArray.get(i).B+"','"+
-//						lcardArray.get(i).miles+"','"+lcardArray.get(i).DescData+"','"+"20001101"+"','"+"2001130"+"')";
+				try{
+				Statement stmt=conn.createStatement();
+				stmt.executeUpdate(sql);
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			for(int i=0;i<li;i++){
+				String sql=lcardArray.get(i).sqlInsert("bpadb", "lcardtb");
 //				System.out.println(sql);
-//				try{
-//				Statement stmt=conn.createStatement();
-//				stmt.executeUpdate(sql);
-//				}
-//				catch (SQLException e)
-//				{
-//					e.printStackTrace();
-//				}
-//			}
-//			for(int i=0;i<ti;i++){
-//				String sql="insert into bpadb.tcardtb values('"+tcardArray.get(i).type+"','"+tcardArray.get(i).chg+"','"+
-//						tcardArray.get(i).owner+"','"+tcardArray.get(i).name1+"','"+tcardArray.get(i).kv1+"','"+tcardArray.get(i).meter+"','"+
-//						tcardArray.get(i).name2+"','"+tcardArray.get(i).kv2+"','"+tcardArray.get(i).cktID+"','"+tcardArray.get(i).SMVA+"','"+
-//						tcardArray.get(i).R+"','"+tcardArray.get(i).X+"','"+tcardArray.get(i).G+"','"+tcardArray.get(i).B+"','"+
-//						tcardArray.get(i).tpkv1+"','"+tcardArray.get(i).tpkv2+"','"+"20001101"+"','"+"20001130"+"')";
+				try{
+				Statement stmt=conn.createStatement();
+				stmt.executeUpdate(sql);
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			for(int i=0;i<ti;i++){
+				String sql=tcardArray.get(i).sqlInsert("bpadb", "tcardtb");
 //				System.out.println(sql);
-//				try{
-//				Statement stmt=conn.createStatement();
-//				stmt.executeUpdate(sql);
-//				}
-//				catch (SQLException e)
-//				{
-//					e.printStackTrace();
-//				}
-//			}
+				try{
+				Statement stmt=conn.createStatement();
+				stmt.executeUpdate(sql);
+				}
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
 			conn.close();
 			
 		} catch (ClassNotFoundException e) {

@@ -18,6 +18,16 @@ public class Tcard {
 	public double tpkv1=0, tpkv2=0;
 	public int YearIn=0, YearOut=0;
 	public char MonthIn=' ', MonthOut=' ';
+	
+	public String sqlInsert(String dbname,String tablename){
+		//attention: escape for single quote marker as ''
+		String sql="insert into "+dbname+"."+tablename+" values('"+type+"','"+chg+"','"+
+				owner.replaceAll("'", "''")+"','"+name1.replaceAll("'", "''")+"','"+kv1+"','"+meter+"','"+
+				name2.replaceAll("'", "''")+"','"+kv2+"','"+cktID+"','"+SMVA+"','"+
+				R+"','"+X+"','"+G+"','"+B+"','"+tpkv1+"','"+tpkv2+"',"+
+				SelfFunc.bpadate(MonthIn,YearIn)+","+SelfFunc.bpadate(MonthOut, YearOut)+")";
+		return sql;
+	}
 	public void CharToCard(String s)
 	{
 		int len = SelfFunc.strlen(s);
